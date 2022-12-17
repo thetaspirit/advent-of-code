@@ -85,11 +85,14 @@ while i < len(lines):
     
     i += 1
 
-total = 0
+unusedSpace = 70000000 - root.getSize()
+overflow = 30000000 - unusedSpace
+
+trash = root # pointer to directory we want to delete.  should be closest to the size of overflow, but not smaller
 
 for d in dirs:
     s = d.getSize()
-    if s <= 100000:
-        total += s
+    if s >= overflow and s < trash.getSize():
+        trash = d
 
-print(total)
+print(trash.getSize())
